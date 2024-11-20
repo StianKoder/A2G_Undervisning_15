@@ -54,4 +54,30 @@ function attack () {
     }
 }
 
-submitButton.addEventListener("click", attack)
+const bossHpBar = document.querySelector('#boss-hp')
+let bossHp = 100
+
+bossHpBar.textContent = "Health " + bossHp + " / 100"
+
+
+function attackBoss () {
+    const damage = Math.floor(Math.random() * 10) + 1
+    const critRoll = Math.floor(Math.random() * 5)+ 1
+        
+    if (bossHp < 1){
+        bossHpBar.textContent = "Bossen er død"
+
+    } else if (critRoll === 5 || damage === 10) {
+        const newBossHp = bossHp - (damage * 2)
+        bossHp = newBossHp
+    
+        bossHpBar.textContent = "Health " + newBossHp + " / 100"
+    } else {
+        const newBossHp = bossHp - damage
+        bossHp = newBossHp
+
+        bossHpBar.textContent = "Health " + newBossHp + " / 100"
+    }
+}
+
+submitButton.addEventListener("click", attackBoss)
